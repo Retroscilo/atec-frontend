@@ -123,6 +123,7 @@ const DetailsLink = ({ text, url }) => (
     className="uk-width-medium uk-margin-top uk-button uk-button-primary uk-box-shadow-small uk-border-rounded uk-flex uk-flex-between uk-flex-middle uk-padding-right"
     href={url}
     target="_blank"
+    rel="noreferrer"
   >
     <p className="uk-margin-remove uk-margin-right uk-flex uk-flex-middle uk-text-left">
       {text}
