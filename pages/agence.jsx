@@ -23,7 +23,6 @@ const Card = ({ text, url }) => (
 )
 
 const agence = ({ agence }) => {
-  console.log(agence)
   return (
     <Layout footer>
       <Seo seo={agence.seo} />
