@@ -9,6 +9,7 @@ import parse from 'html-react-parser'
 const Cover = ({ Cover }) => {
   const global = useContext(GlobalContext)
   const nav = global.Nav
+  if(!nav) return (<div>Loading...</div>)
   return (
     <>
       <div className="uk-height-viewport uk-background-cover uk-light" uk-parallax="bgy: -500" uk-height-viewport="true" style={{ backgroundImage: `url(${cover.src})` }}>

@@ -5,6 +5,7 @@ import Link from 'next/link'
 const Footer = () => {
   const global = useContext(GlobalContext)
   const nav = global.Nav
+  if(!nav) return (<div>Loading...</div>)
   return (
     <div className="uk-container uk-width-1-1 uk-height-small uk-background-secondary uk-light uk-flex footer-clip">
       <p className="uk-container uk-flex uk-flex-middle uk-flex-center uk-height-1-1 uk-text-center uk-margin-remove uk-width-1-2 font-title text-small">

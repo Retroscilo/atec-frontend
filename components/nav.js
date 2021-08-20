@@ -5,6 +5,7 @@ import { GlobalContext } from '../pages/_app.js'
 const Nav = ({ hidden }) => {
   const global = useContext(GlobalContext)
   const nav = global.Nav
+  if(!nav) return (<div>Loading Nav...</div>)
   return (
     <div>
       <div className="uk-padding-large uk-padding-remove-vertical uk-sticky-fixed uk-width-1-1" uk-sticky={`animation: uk-animation-fade; sel-target: .uk-navbar-container; cls-active: uk-navbar-container; cls-inactive: ${hidden ? 'uk-invisible uk-height-null' : 'uk-background-transparent uk-light uk-position-relative'}; top: 100;`}>
