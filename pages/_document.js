@@ -14,20 +14,39 @@ class MyDocument extends Document {
           />
           <link
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css"
-          />
+            href="/uikit/css/uikit.min.css"
+            />
           <script
+            defer
+            src="/uikit/js/uikit.min.js"
+            />
+          <script
+            defer
+            src="/uikit/js/uikit.js"
+            />
+          <script
+            defer
+            src="/uikit/js/uikit-icons.min.js"
+            />
+            {/* <link
+              rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css"
+            /> */}
+          {/* <script
             async
+            rel="preconnect"
             src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"
-          />
-          <script
+          /> */}
+          {/* <script
             async
+            rel="preconnect"
             src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"
           />
           <script
             async
+            rel="preconnect"
             src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js"
-          />
+          /> */}
           <link href="https://fonts.googleapis.com/css2?family=Expletus+Sans&display=swap" rel="stylesheet" />
           <link href="https://fonts.googleapis.com/css2?family=Baumans&display=swap" rel="stylesheet" />
         </Head>
