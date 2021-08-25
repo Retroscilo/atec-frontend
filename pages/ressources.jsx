@@ -105,6 +105,8 @@ const Directory = ({ directory }) => {
 )}
 
 const Ressources = ({ ressources }) => {
+  const [ DOMReady, setDOMReady] = useState(false)
+  useEffect(() => setDOMReady(true), [])
   return (
     <Layout>
       <Seo seo={ressources.seo} />
@@ -116,11 +118,11 @@ const Ressources = ({ ressources }) => {
         <h3>
           Téléchargez les ressources mises à disposition pour votre projet et partagez-en.
         </h3>
-        <div className="uk-flex uk-flex-wrap uk-flex-column">
+        {DOMReady && <div className="uk-flex uk-flex-wrap uk-flex-column">
           {ressources.Dossiers.map((dossier) => (
             <Directory key={dossier.id} directory={dossier} />
           ))}
-        </div>
+        </div>}
       </div>
     </Layout>
   )
