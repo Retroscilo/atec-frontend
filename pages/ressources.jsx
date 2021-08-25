@@ -77,7 +77,7 @@ const Directory = ({ directory }) => {
     UIkit.util.on(`#dropdown-${directory.id}`, 'hide', () => {
       setSelected(false)
     })
-  }, [])
+  })
   return (
     <div className={`uk-card uk-card-default uk-border-rounded uk-width-medium`}>
       <button

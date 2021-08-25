@@ -27,17 +27,17 @@ class MyDocument extends Document {
           <script
             defer
             src="/uikit/js/uikit-icons.min.js"
-            />
+          />
             {/* <link
               rel="stylesheet"
               href="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/css/uikit.min.css"
-            /> */}
-          {/* <script
+            />
+          <script
             async
             rel="preconnect"
             src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.min.js"
-          /> */}
-          {/* <script
+          />
+          <script
             async
             rel="preconnect"
             src="https://cdn.jsdelivr.net/npm/uikit@3.2.3/dist/js/uikit-icons.min.js"
