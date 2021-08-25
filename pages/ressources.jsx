@@ -70,14 +70,14 @@ const EmbedDirectory = ({ directory }) => (
 const Directory = ({ directory }) => {
   const [ selected, setSelected ] = useState(false)
   useEffect(() => {
-    const dropdown = UIkit.dropdown(`#dropdown-${directory.id}`, { pos: "right-center", mode: "click" })
+    UIkit.dropdown(`#dropdown-${directory.id}`, { pos: "right-center", mode: "click" })
     UIkit.util.on(`#dropdown-${directory.id}`, 'show', () => {
       setSelected(true)
     })
     UIkit.util.on(`#dropdown-${directory.id}`, 'hide', () => {
       setSelected(false)
     })
-  })
+  }, [])
   return (
     <div className={`uk-card uk-card-default uk-border-rounded uk-width-medium`}>
       <button
