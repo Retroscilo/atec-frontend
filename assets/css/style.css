@@ -207,6 +207,11 @@ img:hover {
   color: black !important;
 }
 
+.uk-file:hover {
+  background: #EDEDED;
+  cursor: pointer;
+}
+
 @media(max-height: 800px) {
   .cover-nav {
     bottom: 10px;

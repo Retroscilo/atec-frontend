@@ -21,11 +21,9 @@ class MyDocument extends Document {
             src="/uikit/js/uikit.min.js"
             />
           <script
-            defer
             src="/uikit/js/uikit.js"
             />
           <script
-            defer
             src="/uikit/js/uikit-icons.min.js"
           />
             {/* <link

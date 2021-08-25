@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { fetchAPI } from "../lib/api"
 import Seo from "../components/seo"
 import Layout from "../components/layout"
@@ -30,8 +30,8 @@ const download = (fichier_a_partager, name) => {
 
 const File = ({ file }) => {
   return (
-  <div className="uk-flex uk-flex-middle uk-width-medium">
-    <div
+  <div className="uk-flex uk-flex-middle uk-width-medium uk-padding-small uk-file">
+    <span
       className="uk-margin-right"
       uk-icon={`icon: ${
         file.fichier_a_partager.ext === ".pdf" ? "file-pdf" : "file"
@@ -68,7 +68,15 @@ const EmbedDirectory = ({ directory }) => (
 ) */
 
 const Directory = ({ directory }) => {
+  console.log(directory)
   const [ selected, setSelected ] = useState(false)
+  const button = useRef(null)
+  const prompt = e => {
+    e.stopPropagation()
+    e.preventDefault()
+    const input = window.prompt('Saisissez le mot de passe associé au projet :')
+    if (input === (directory.mot_de_passe || "")) button.current.click()
+  }
   useEffect(() => {
     UIkit.dropdown(`#dropdown-${directory.id}`, { pos: "right-center", mode: "click" })
     UIkit.util.on(`#dropdown-${directory.id}`, 'show', () => {
@@ -79,24 +87,24 @@ const Directory = ({ directory }) => {
     })
   }, [])
   return (
-    <div className={`uk-card uk-card-default uk-border-rounded uk-width-medium`}>
+    <div onClick={prompt} className={`uk-card uk-card-default uk-border-rounded uk-width-medium`}>
       <button
+        ref={button}
         type="button"
+        style={{ pointerEvents: 'none' }}
         className={`${selected && 'uk-button-primary uk-light'} uk-button-reset uk-card-body uk-flex uk-flex-middle uk-width-1-1 uk-margin-remove`}
       >
-        <span uk-icon="icon: folder; ratio: 2" className="uk-margin-right" />
+        <span uk-icon="icon: folder; ratio: 2" className={`uk-margin-right ${selected && 'uk-light'}`} />
         <h2 className="uk-margin-remove">{directory.nom_du_dossier}</h2>
       </button>
       <div id={`dropdown-${directory.id}`}>
-      <ul className="uk-iconnav">
-        <li uk-icon="add" ></li>
-        <li uk-icon="download" ></li>
-      </ul>
         <div className="uk-flex uk-flex-column">
+          <span>Fichiers disponibles</span> 
+          <hr className="uk-margin-remove-bottom" />
           {directory.fichiers.map((file, i) => (
             <div key={file.id}>
               <File file={file} />
-              {directory.fichiers.length !== i + 1 && <hr />}
+              {directory.fichiers.length !== i + 1 && <hr className="uk-margin-remove" />}
             </div>
           ))}
         </div>
@@ -129,7 +137,7 @@ const Ressources = ({ ressources }) => {
 }
 
 export async function getStaticProps() {
-  const [ressources] = await Promise.all([fetchAPI("/ressources")])
+  const [ ressources ] = await Promise.all([fetchAPI("/ressources")])
 
   return {
     props: { ressources },
