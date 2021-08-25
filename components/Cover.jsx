@@ -26,7 +26,7 @@ const Cover = ({ Cover }) => {
             ))}
           </div>
         </div>
-          <a href="#belowCover" uk-scroll="true" className="uk-margin-auto uk-position-bottom uk-flex uk-flex-center uk-flex-middle" style={{ position: 'relative', border: '2px solid white', borderRadius: '100px', width: '50px', height: '50px', cursor: 'pointer', marginBottom: '10vh' }}>
+          <a href="#belowCover" uk-scroll="true" className="uk-margin-auto uk-position-bottom uk-flex uk-flex-center uk-flex-middle cover-nav" style={{  }}>
             <div className="uk-animation-hop" uk-icon="icon: chevron-down; ratio: 2;" />
           </a>
       </div>

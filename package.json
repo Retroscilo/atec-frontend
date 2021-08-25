@@ -20,7 +20,8 @@
     "react": "17.0.0",
     "react-dom": "17.0.0",
     "react-markdown": "^4.2.2",
-    "react-moment": "^0.9.6"
+    "react-moment": "^0.9.6",
+    "uikit": "^3.7.2"
   },
   "license": "MIT",
   "devDependencies": {

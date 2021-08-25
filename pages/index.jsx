@@ -65,7 +65,7 @@ const Home = ({ homepage }) => {
           </div>
         </div>
       </div>
-      <div className="uk-section uk-background-primary">
+      <div style={{ position: 'relative', top: '30px' }} className="uk-section uk-background-primary">
         <Link href="/contact">
           <div className="uk-flex uk-flex-between uk-flex-wrap uk-flex-wrap-middle uk-padding uk-padding-remove-vertical">
             <h2 className="uk-light uk-margin-remove-bottom uk-margin-top">Vous souhaitez réaliser un projet, un devis ?</h2>

@@ -109,7 +109,7 @@ const Realisations = ({ realisations }) => {
           <img className="uk-width-large uk-visible@s" src="/construction.svg" alt="" />
         </div>
         <h3>Exemple de carnets de détails</h3>
-        <DetailsLink url="/musee.pdf" text="Musée de musique de l'océan Indien" />
+        <DetailsLink url="/musee.pdf" text="Musée de l'océan Indien" />
         <DetailsLink url="/aeroclub.pdf" text="Aéroclub" />
         <DetailsLink url="/arbradelice.pdf" text="Restaurant l'arbradélice" />
         <DetailsLink url="/cloture.pdf" text="Clôtures de l'arbradélice" />
