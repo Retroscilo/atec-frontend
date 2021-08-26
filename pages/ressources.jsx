@@ -9,26 +9,30 @@ import marked from "marked"
 import parse from "html-react-parser"
 import UIkit from 'uikit'
 
-const download = (fichier_a_partager, name) => {
+const download = async ({ fichier_a_partager, nom_du_fichier }) => {
   if (!fichier_a_partager) {
     throw new Error("Resource URL not provided! You need to provide one");
   }
- fetch(getStrapiMedia(fichier_a_partager))
-   .then(response => response.blob())
-   .then(blob => {
-     const blobURL = URL.createObjectURL(blob);
-     const a = document.createElement("a");
-     a.href = blobURL;
-     a.style = "display: none";
-
-     if (name && name.length) a.download = name;
-     document.body.appendChild(a);
-     a.click();
-   })
-
+  const res = await fetch(getStrapiMedia(fichier_a_partager))
+  const blob = await res.blob() 
+  const blobURL = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = blobURL;
+  a.style = "display: none";
+  if (nom_du_fichier && nom_du_fichier.length) a.download = nom_du_fichier;
+  document.body.appendChild(a);
+  a.click();
 };
 
 const File = ({ file }) => {
+  const [ loading, setLoading ] = useState(false)
+  const downloadFile = (file) => {
+    (async () => {
+      setLoading(true)
+      await download(file)
+      setLoading(false)
+    })()
+  }
   return (
   <div className="uk-flex uk-flex-middle uk-width-medium uk-padding-small uk-file">
     <span
@@ -40,11 +44,12 @@ const File = ({ file }) => {
     <a
       className="uk-link uk-link-black uk-link-reset uk-margin-right uk-width-expand"
       /* href={file.fichier_a_partager.url} */
-      onClick={() => download(file.fichier_a_partager, 'details')}
+      onClick={() => downloadFile(file)}
     >
       {file.nom_du_fichier}
     </a>
-    <div uk-icon="download"></div>
+    {!loading && <div uk-icon='download'></div>}
+    {loading && <div uk-spinner="ratio: 0.8"></div>}
   </div>
 )}
 
