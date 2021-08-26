@@ -212,6 +212,11 @@ img:hover {
   cursor: pointer;
 }
 
+.uk-hover:hover {
+  color:rgba(255, 200, 138, 1);
+  cursor: pointer;
+}
+
 @media(max-height: 800px) {
   .cover-nav {
     bottom: 10px;

@@ -38,7 +38,7 @@ const File = ({ file }) => {
       }`}
     />
     <a
-      className="uk-link uk-link-reset uk-margin-right uk-width-expand"
+      className="uk-link uk-link-black uk-link-reset uk-margin-right uk-width-expand"
       /* href={file.fichier_a_partager.url} */
       onClick={() => download(file.fichier_a_partager, 'details')}
     >
@@ -68,17 +68,18 @@ const EmbedDirectory = ({ directory }) => (
 ) */
 
 const Directory = ({ directory }) => {
-  console.log(directory)
   const [ selected, setSelected ] = useState(false)
   const button = useRef(null)
   const prompt = e => {
+    if(selected) return
+    if(!directory.mot_de_passe) { button.current.click(); return }
     e.stopPropagation()
-    e.preventDefault()
     const input = window.prompt('Saisissez le mot de passe associé au projet :')
-    if (input === (directory.mot_de_passe || "")) button.current.click()
+    if (input === directory.mot_de_passe) button.current.click()
   }
   useEffect(() => {
     UIkit.dropdown(`#dropdown-${directory.id}`, { pos: "right-center", mode: "click" })
+
     UIkit.util.on(`#dropdown-${directory.id}`, 'show', () => {
       setSelected(true)
     })
@@ -87,28 +88,34 @@ const Directory = ({ directory }) => {
     })
   }, [])
   return (
-    <div onClick={prompt} className={`uk-card uk-card-default uk-border-rounded uk-width-medium`}>
-      <button
-        ref={button}
-        type="button"
-        style={{ pointerEvents: 'none' }}
-        className={`${selected && 'uk-button-primary uk-light'} uk-button-reset uk-card-body uk-flex uk-flex-middle uk-width-1-1 uk-margin-remove`}
-      >
-        <span uk-icon="icon: folder; ratio: 2" className={`uk-margin-right ${selected && 'uk-light'}`} />
-        <h2 className="uk-margin-remove">{directory.nom_du_dossier}</h2>
-      </button>
-      <div id={`dropdown-${directory.id}`}>
-        <div className="uk-flex uk-flex-column">
-          <span>Fichiers disponibles</span> 
-          <hr className="uk-margin-remove-bottom" />
-          {directory.fichiers.map((file, i) => (
-            <div key={file.id}>
-              <File file={file} />
-              {directory.fichiers.length !== i + 1 && <hr className="uk-margin-remove" />}
+    <div className="uk-width-medium uk-position-relative uk-margin-bottom">
+      <div  className={`uk-card uk-card-default uk-border-rounded `}>
+        <button
+          ref={button}
+          type="button"
+          className={`${selected && 'uk-button-primary uk-light'} uk-button-reset uk-card-body uk-flex uk-flex-middle uk-width-1-1 uk-margin-remove`}
+        >
+          <span uk-icon="icon: folder; ratio: 2" className={`uk-margin-right ${selected && 'uk-light'}`} />
+          <h2 className="uk-margin-remove">{directory.nom_du_dossier}</h2>
+        </button>
+        <div id={`dropdown-${directory.id}`}>
+          <div className="uk-flex uk-flex-column">
+            <span className="uk-flex uk-flex-align">Fichiers disponibles</span> 
+            <hr className="uk-margin-remove-bottom" />
+            {directory.fichiers.map((file, i) => (
+              <div key={file.id}>
+                <File file={file} />
+                <hr className="uk-margin-remove" />
+              </div>
+            ))}
+            <div className="uk-flex uk-flex-middle uk-margin-top uk-hover">
+              <p className="uk-margin-remove-bottom uk-margin-right">ajouter un fichier</p>
+              <span uk-icon="plus-circle" />
             </div>
-          ))}
+          </div>
         </div>
       </div>
+      <span style={{ top: 0 }} className="uk-width-1-1 uk-height-1-1 uk-position-absolute" onClickCapture={prompt} />
     </div>
 )}
 
@@ -122,7 +129,7 @@ const Ressources = ({ ressources }) => {
         img={ressources.header.image}
         title={ressources.header.title}
       />
-      <div className="uk-container" style={{ height: '50vh' }}>
+      <div className="uk-container uk-margin-bottom" style={{ minHeight: '50vh' }}>
         <h3>
           Téléchargez les ressources mises à disposition pour votre projet et partagez-en.
         </h3>
