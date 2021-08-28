@@ -113,6 +113,16 @@ img:hover {
   line-height: 1.5;
 }
 
+.uk-text-xxsmall {
+  font-size: 12px;
+}
+
+.uk-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .text-small {
   font-size: 2rem;
 }
