@@ -9,7 +9,6 @@ const File = ({ file }) => {
     await download(file)
     setLoading(false)
   }
-  console.log(file)
 
   return (
     <div className="uk-flex uk-flex-middle uk-width-medium uk-padding-small uk-file">
@@ -22,6 +21,7 @@ const File = ({ file }) => {
       <a
         className="uk-link uk-link-black uk-link-reset uk-margin-right uk-width-expand uk-ellipsis"
         onClick={() => downloadFile(file)}
+        uk-tooltip={`title: ${file.nom_du_fichier}; delay: 500; animation: uk-animation-fade;`}
       >
         {file.nom_du_fichier}
       </a>
