@@ -20,27 +20,26 @@ const File = ({ file, uploadedFiles, setUploadedFiles }) => {
 
   return (
     <div
-      className={`uk-text-small uk-margin-left uk-position-relative ${
+    style={{ zIndex: 1000 }}
+      className={`uk-text-small uk-position-relative uk-flex uk-flex-between uk-margin-left ${
         hover && "uk-text-danger"
       }`}
     >
-      <div
+      <span
         style={{
-          width: "100px",
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
         }}
       >
         {file.name}
-      </div>
+      </span>
       <span
         onMouseOver={onMouseEnter}
         onMouseOut={onMouseOut}
         onClick={onClick}
         style={{
-          position: "absolute",
-          right: "-20px",
+          position: "relative",
           bottom: 0,
           cursor: "pointer",
         }}
@@ -78,7 +77,7 @@ const Uploader = ({ ressources, refresh, directoryId }) => {
   const onChange = (e) => {
     if (uploadedFiles?.find((file) => e.target.file == file))
       return alert("Ce fichier est déjà sélectionné !")
-    const newUploadedFiles = [...uploadedFiles, e.target.files[0]]
+    const newUploadedFiles = [ e.target.files[0], ...uploadedFiles ]
     setUploadedFiles(newUploadedFiles.filter(Boolean))
   }
 
@@ -97,6 +96,7 @@ const Uploader = ({ ressources, refresh, directoryId }) => {
       <div className="uk-flex uk-flex-column uk-flex-bottom">
         {uploadedFiles.length > 0 && (
           <>
+            <span style={{ maxHeight: '50px', overflowY: 'auto', overflowX: 'visible' }}>
             {uploadedFiles.map((file, i) => (
               <span key={i}>
                 <File
@@ -106,6 +106,7 @@ const Uploader = ({ ressources, refresh, directoryId }) => {
                 />
               </span>
             ))}
+            </span>
             <button
               onClick={onClick}
               className="uk-margin-small-top uk-button-primary uk-width-2-3"

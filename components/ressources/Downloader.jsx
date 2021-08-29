@@ -39,12 +39,14 @@ const Downloader = ({ directory }) => {
     <>
       <span className="uk-flex uk-flex-align">Fichiers disponibles</span>
       <hr className="uk-margin-remove-bottom" />
+      <span className="uk-height-medium uk-overflow-auto">
       {directory.fichiers.map((file, i) => (
         <div key={file.id}>
           <File file={file} />
           <hr className="uk-margin-remove" />
         </div>
       ))}
+      </span>
     </>
   )
 }
