@@ -9,5 +9,6 @@
   "rules": {
     "prettier/prettier": 1,
     "react/no-unescaped-entities": "off",
+    "react/display-name" : "off"
   }
 }
