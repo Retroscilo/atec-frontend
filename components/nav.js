@@ -12,7 +12,7 @@ const Nav = ({ hidden }) => {
         <nav className="uk-navbar" uk-navbar="true" >
           <div className="uk-navbar-left uk-link-reset">
             <Link href="/">
-              <a className="uk-font-large"><h2 className="uk-margin-remove">{nav.title}</h2> </a>
+              <a className="uk-font-large"><h2 className="uk-margin-remove uk-title-nav">{nav.title}</h2> </a>
             </Link>
           </div>
           <div className="uk-navbar-right">
