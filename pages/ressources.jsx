@@ -8,38 +8,47 @@ import { Uploader, Downloader } from '../components/ressources'
 
 const Directory = ({ directory, ressources, refresh }) => {
   const [selected, setSelected] = useState(false)
-  const button = useRef(null)
+  const openButton = useRef(null)
+  const closeButton = useRef(null)
 
   const prompt = (e) => {
     if (selected) return
     if (!directory.mot_de_passe) {
-      button.current.click()
+      openButton.current.click()
       return
     }
     e.stopPropagation()
     const input = window.prompt("Saisissez le mot de passe associé au projet :")
-    if (input === directory.mot_de_passe) button.current.click()
+    if (input === directory.mot_de_passe) openButton.current.click()
   }
 
   useEffect(() => {
     UIkit.dropdown(`#dropdown-${directory.id}`, {
       pos: "right-center",
       mode: "click",
+      boundary: '.boundary'
     })
-
     UIkit.util.on(`#dropdown-${directory.id}`, "show", () => {
       setSelected(true)
     })
     UIkit.util.on(`#dropdown-${directory.id}`, "hide", () => {
       setSelected(false)
     })
+
+    function closeDirectory(e) {
+      UIkit.dropdown(`#dropdown-${directory.id}`).hide(0)
+    }
+    closeButton.current.addEventListener("click", closeDirectory, false)
+
+    return () => closeButton.current.removeEventListener("click", closeDirectory, false)
+    
   }, [])
 
   return (
     <div style={{ order: directory.id }} className="uk-width-medium uk-position-relative uk-margin-bottom">
-      <div className={`uk-card uk-card-default uk-border-rounded `}>
+      <div className={`uk-card uk-card-default uk-border-rounded`}>
         <button
-          ref={button}
+          ref={openButton}
           type="button"
           className={`${
             selected && "uk-button-primary uk-light"
@@ -52,7 +61,8 @@ const Directory = ({ directory, ressources, refresh }) => {
           />
           <h3 className="uk-margin-remove">{directory.nom_du_dossier}</h3>
         </button>
-        <div id={`dropdown-${directory.id}`}>
+        <div className="responsive-layout" id={`dropdown-${directory.id}`}>
+          <span ref={closeButton} className="uk-position-top-right uk-padding" uk-icon="icon: close" />
           <div className="uk-flex uk-flex-column">
             <Downloader directory={directory} />
             <Uploader ressources={ressources} refresh={refresh} directoryId={directory.id} />

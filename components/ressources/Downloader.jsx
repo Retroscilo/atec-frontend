@@ -11,7 +11,7 @@ const File = ({ file }) => {
   }
 
   return (
-    <div className="uk-flex uk-flex-middle uk-width-medium uk-padding-small uk-file">
+    <div className="uk-flex uk-flex-middle uk-width-medium@s uk-padding-small uk-file">
       <span
         className="uk-margin-right"
         uk-icon={`icon: ${

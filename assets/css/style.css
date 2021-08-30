@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+button:focus {
+  outline: 'none';
+}
+
 h1 {
   font-family: 'Expletus Sans' !important;
   letter-spacing: .2rem;
@@ -102,6 +106,10 @@ img:hover {
 .rounded {
   border-radius: 3px;
   box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+}
+
+.uk-width-xsmall {
+  width: 80px;
 }
 
 .uk-height-xsmall {
@@ -226,6 +234,16 @@ img:hover {
 .uk-hover:hover {
   color:rgb(224, 157, 81);
   cursor: pointer;
+}
+
+@media(max-width: 640px) {
+  .responsive-layout {
+    position: fixed;
+    left: 0 !important;
+    top: 25% !important;
+    width: 100vw;
+    margin: 0;
+  }
 }
 
 @media(max-height: 800px) {

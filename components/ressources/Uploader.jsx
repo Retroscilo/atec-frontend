@@ -20,12 +20,13 @@ const File = ({ file, uploadedFiles, setUploadedFiles }) => {
 
   return (
     <div
-    style={{ zIndex: 1000 }}
-      className={`uk-text-small uk-position-relative uk-flex uk-flex-between uk-margin-left ${
+      style={{ zIndex: 1000 }}
+      className={`uk-text-small uk-position-relative uk-flex uk-flex-between ${
         hover && "uk-text-danger"
       }`}
     >
       <span
+        className="uk-margin-right-small"
         style={{
           overflow: "hidden",
           textOverflow: "ellipsis",
@@ -42,6 +43,8 @@ const File = ({ file, uploadedFiles, setUploadedFiles }) => {
           position: "relative",
           bottom: 0,
           cursor: "pointer",
+          alignSelf: "center",
+          marginLeft: "5px",
         }}
         uk-icon="icon: close; ratio: 0.8"
       />
@@ -50,7 +53,7 @@ const File = ({ file, uploadedFiles, setUploadedFiles }) => {
 }
 
 const FileInput = forwardRef(({ onChange }, ref) => (
-  <span className="uk-flex uk-flex-middle uk-hover">
+  <span className="uk-flex uk-flex-middle uk-flex-center uk-flex-wrap uk-hover uk-width-2-3">
     <p className="uk-margin-remove-bottom uk-margin-right">
       Ajouter un fichier
     </p>
@@ -67,7 +70,7 @@ const FileInput = forwardRef(({ onChange }, ref) => (
 
 const Uploader = ({ ressources, refresh, directoryId }) => {
   const [uploadedFiles, setUploadedFiles] = useState([])
-  const [ loading, setLoading ] = useState(false)
+  const [loading, setLoading] = useState(false)
   const input = useRef(null)
 
   function openExplorer() {
@@ -77,7 +80,7 @@ const Uploader = ({ ressources, refresh, directoryId }) => {
   const onChange = (e) => {
     if (uploadedFiles?.find((file) => e.target.file == file))
       return alert("Ce fichier est déjà sélectionné !")
-    const newUploadedFiles = [ e.target.files[0], ...uploadedFiles ]
+    const newUploadedFiles = [e.target.files[0], ...uploadedFiles]
     setUploadedFiles(newUploadedFiles.filter(Boolean))
   }
 
@@ -93,28 +96,37 @@ const Uploader = ({ ressources, refresh, directoryId }) => {
   return (
     <div className="uk-flex uk-flex-top uk-margin-top" onClick={openExplorer}>
       <FileInput ref={input} onChange={onChange} />
-      <div className="uk-flex uk-flex-column uk-flex-bottom">
+      <div className="uk-flex uk-flex-column uk-flex-bottom uk-flex-between uk-width-2-5 uk-margin-left-small">
         {uploadedFiles.length > 0 && (
           <>
-            <span style={{ maxHeight: '50px', overflowY: 'auto', overflowX: 'visible' }}>
-            {uploadedFiles.map((file, i) => (
-              <span key={i}>
-                <File
-                  file={file}
-                  setUploadedFiles={setUploadedFiles}
-                  uploadedFiles={uploadedFiles}
-                />
-              </span>
-            ))}
+            <span
+              style={{
+                maxHeight: "50px",
+                overflowY: "auto",
+                overflowX: "visible",
+                width: "100%",
+              }}
+            >
+              {uploadedFiles.map((file, i) => (
+                <span key={i}>
+                  <File
+                    file={file}
+                    setUploadedFiles={setUploadedFiles}
+                    uploadedFiles={uploadedFiles}
+                  />
+                </span>
+              ))}
             </span>
             <button
               onClick={onClick}
-              className="uk-margin-small-top uk-button-primary uk-width-2-3"
+              style={{ alignSelf: 'center' }}
+              className="uk-margin-small-top uk-button-primary uk-width-xsmall"
             >
-              {!loading ? 
-                <span>envoyer</span> 
-                : 
-                <div className="uk-margin-auto" uk-spinner="ratio: 0.4"></div> }
+              {!loading ? (
+                <span>envoyer</span>
+              ) : (
+                <div className="uk-margin-auto" uk-spinner="ratio: 0.4"></div>
+              )}
             </button>
           </>
         )}
