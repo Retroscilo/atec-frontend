@@ -87,8 +87,6 @@ const DynamicComponent = ({
                 key={p.id}
                 uk-scrollspy={`cls: visible; hidden: false;`}
                 className={`paragraph-${p.id} hidden`}
-                uk-scrollspy={`cls: visible; hidden: false;`}
-                className={`paragraph-${p.id} hidden`}
               >
                 {p.paragraph}
               </p>
