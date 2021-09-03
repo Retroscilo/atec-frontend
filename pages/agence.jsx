@@ -4,6 +4,8 @@ import Seo from "../components/seo"
 import Layout from "../components/layout"
 import NextImage from "../components/coverImage"
 import SmallCover from '../components/smallCover'
+import marked from 'marked'
+import parse from "html-react-parser"
 
 const Card = ({ text, url }) => (
   <div className="uk-card uk-margin-right uk-margin-left uk-card-default uk-margin-top uk-border-rounded uk-width-sm uk-flex uk-flex-column uk-flex-center">
@@ -40,6 +42,7 @@ const agence = ({ agence }) => {
           <hr />
         </div>
         {agence.content.map((content) => {
+          if(!content.cover) return
           return (
             <div
               key={content.id}
@@ -93,15 +96,24 @@ const agence = ({ agence }) => {
         </div>
         <div className="uk-container uk-text-center uk-margin-top-large uk-margin-bottom">
           <h2>Notre équipe</h2>
-          <hr />
-          <div>
-            <h3>
-              <span className="text-primary">Marc Torres</span>, concepteur et Economiste de la construction, vous
-              accompagnera dans la concrétisation et la mise en oeuvre de vos
-              projets.
-            </h3>
-            <img className="uk-height-medium" src="/marc.jpeg" alt="" />
-          </div>
+          {agence.content.map(content => {
+            if(content.__component !== "shared.member") return
+            console.log(content)
+            return (
+              <>
+                <hr />
+                <div>
+                  <h3>
+                    {parse(marked(content.description))}
+                  </h3>
+                  <div className="uk-height-medium uk-width-medium uk-margin-auto uk-position-relative">
+                    {content.member_image && <NextImage  image={content.member_image} />}
+                  </div>
+                </div>
+              </>
+            )
+          })}
+          
         </div>
       </div>
     </Layout>
