@@ -111,6 +111,7 @@ const Ressources = ({ staticRessources }) => {
             {ressources.Dossiers.map((dossier) => (
               <Directory key={dossier.id} directory={dossier} ressources={ressources} refresh={updateRessources} />
             ))}
+            {ressources.Dossiers.length === 0 && <p>Aucune ressource de disponible</p>}
           </div>
         )}
       </div>
