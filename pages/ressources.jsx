@@ -96,11 +96,11 @@ const Ressources = ({ staticRessources }) => {
       <Seo seo={ressources.seo} />
       <SmallCover
         img={ressources.header.image}
-        title={ressources.header.title}
+        title={ressources.header.title}t
       />
       <div
         className="uk-container uk-margin-bottom"
-        style={{ minHeight: "50vh" }}
+        style={{ minHeight: "70vh" }}
       >
         <h3>
           Téléchargez les ressources mises à disposition pour votre projet et
