@@ -1,3 +1,3 @@
 # atec-frontend
 
-live here: atec.agency
+live here: https://atec.agency
